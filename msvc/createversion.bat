@@ -7,10 +7,10 @@ IF ERRORLEVEL 1 (
 	IF "%APPVEYOR_BUILD_VERSION%" == "" (
 		echo build not from appveryor
 	) ELSE (
-		git tag uuu_%APPVEYOR_BUILD_VERSION%
+		git tag -m "uuu %APPVEYOR_BUILD_VERSION%" uuu_%APPVEYOR_BUILD_VERSION%
 	) 
 
-	FOR /F "tokens=*" %%a in ('call git describe --tags --long') do (
+	FOR /F "tokens=*" %%a in ('call git describe --long') do (
 		echo #define GIT_VERSION "lib%%a" > %1/gitversion.h
 	)
 )
